@@ -119,7 +119,7 @@ void menu(SDL_Renderer *renderer) {
     hova.w = surface->w;
     hova.h = surface->h;
     SDL_RenderCopy(renderer, texture, NULL, &hova);
-
+    SDL_FreeSurface(surface);
     surface = TTF_RenderUTF8_Blended(szovegtipus, "Játék folytatása", szin);
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     hova.x = (1000 - surface->w) / 2;
@@ -130,6 +130,7 @@ void menu(SDL_Renderer *renderer) {
     SDL_RenderPresent(renderer);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+    TTF_CloseFont(szovegtipus);
 }
 
 SDL_Point kattintas(SDL_Renderer *renderer, Lista *u) {
