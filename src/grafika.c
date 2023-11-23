@@ -52,17 +52,17 @@ void alaprajz(SDL_Renderer *renderer) {
     SDL_RenderPresent(renderer);
 }
 void kepbetoltes(SDL_Renderer *renderer, SDL_Texture **babukep, SDL_Texture **mentesgomb, SDL_Texture **visszagomb) {
-    *babukep = IMG_LoadTexture(renderer, "pieces_2.png");
+    *babukep = IMG_LoadTexture(renderer, "assets/pieces_2.png");
     if (*babukep == NULL) {
         SDL_Log("Nem nyithato meg a kepfajl: %s", IMG_GetError());
         exit(1);
     }
-    *mentesgomb = IMG_LoadTexture(renderer, "gomb.png");
+    *mentesgomb = IMG_LoadTexture(renderer, "assets/gomb.png");
     if (*mentesgomb == NULL) {
         SDL_Log("Nem nyithato meg a gombfajl: %s", IMG_GetError());
         exit(1);
     }
-    *visszagomb = IMG_LoadTexture(renderer, "vissza.png");
+    *visszagomb = IMG_LoadTexture(renderer, "assets/vissza.png");
     if (*mentesgomb == NULL) {
         SDL_Log("Nem nyithato meg a gombfajl: %s", IMG_GetError());
         exit(1);
@@ -104,7 +104,7 @@ void menu(SDL_Renderer *renderer) {
     boxRGBA(renderer, 0, 0, 1000, 1000, 23, 75, 218, 0xFF);
     SDL_Color szin = {0, 12, 107};
     TTF_Init();
-    TTF_Font *szovegtipus = TTF_OpenFont("LiberationSerif-Regular.ttf", 56);
+    TTF_Font *szovegtipus = TTF_OpenFont("assets/LiberationSerif-Regular.ttf", 56);
     if (!szovegtipus) {
         SDL_Log("Nem sikerult megnyitni a szovegtipust! %s\n", TTF_GetError());
         exit(1);
