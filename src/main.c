@@ -1,36 +1,63 @@
-#include <stdio.h>
-
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL2_gfxPrimitives.h>
+#include <stdlib.h>
 #include "sakktabla.h"
+#include "fajl.h"
+#include "lancolt_lista.h"
 #include "lepeskisegitofuggvenyek.h"
+#include "grafika.h"
+#include "debugmalloc.h"
 
 int main(void) {
-    /*tablakiiras
-    printf("Matrix:\n");
-    feltolt();
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            printf("%d ", tabla[i][j].babu);
+    int kivansakkban;
+    int vissza_lepes_db =1;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *babukep, *gomb, *visszagomb;
+    Babuk tabla[8][8];
+    sdl_init(1000, 1000, &window,&renderer);
+    FILE *sakkfajl = NULL;
+    Lista *volt_lepesek = (Lista*) malloc(sizeof(Lista));
+    bool kikov = true;
+    kepbetoltes(renderer,&babukep, &gomb,&visszagomb);
+    menu(renderer);
+    int vissszateres_ertek;
+    if(menu_kattintas(renderer).y < 500) {
+        feltolt(renderer, babukep, gomb,visszagomb,tabla);
+        for(int i = 0 ; i<8;++i){
+            for(int j =0; j<8;++j){
+                volt_lepesek->ltabla[i][j].szin = tabla[i][j].szin;
+                volt_lepesek->ltabla[i][j].babu =tabla[i][j].babu;
+            }
         }
-        printf("\n");
-    }*/
-    /*elsolepesellenorzes
-     * feltolt();
-    if(szabalyoslepes(tabla[1][1],1))
-        printf("lehet");
-    else
-        printf("nem");
+        volt_lepesek->kov = NULL;
 
-*/
-    feltolt();
-    if(nincsakadalylinearisan(6,5,7,7))
-        printf("nincs\n");
-    else
-        printf(" akadaly\n");
+        do {
+            vissszateres_ertek =grafikailepes(renderer, babukep,gomb,visszagomb,sakkfajl, tabla, &kikov,&volt_lepesek);
 
-    if(nincsakadalylinearisan(2,5,0,3))
-        printf("nincs");
-    else
-        printf(" akadaly");
+            if(van_sakk(tabla, &kivansakkban)) {
+                printf("sakk");
+                if(sakkmatt(tabla, kivansakkban))
+                    alaprajz(renderer);
+            }
+            if (vissszateres_ertek == 0)
+                elore(&volt_lepesek, tabla);
+        }while (vissszateres_ertek == 0 || vissszateres_ertek == 1) ;
+
+    }
+    else if (fajlbeolvasas(sakkfajl,tabla,&kikov)==0) {
+        alaprajz(renderer);
+        betoltott_kirajz(renderer,tabla,babukep,gomb,visszagomb);
+        do {
+            vissszateres_ertek =grafikailepes(renderer, babukep,gomb,visszagomb,sakkfajl, tabla, &kikov,&volt_lepesek);
+            if (vissszateres_ertek == 0)
+                elore(&volt_lepesek, tabla);
+        }while (vissszateres_ertek == 0 || vissszateres_ertek == 1) ;
+
+    }
+
 
     return 0;
+
 }

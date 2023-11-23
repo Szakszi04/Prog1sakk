@@ -334,7 +334,8 @@ if(SDL2_FOUND)
 
   # SDL2::Core target
   if(SDL2_LIBRARY AND NOT TARGET SDL2::Core)
-    add_library(SDL2::Core UNKNOWN IMPORTED)
+    add_library(SDL2::Core UNKNOWN IMPORTED
+            ../../src/grafikaproba.c)
     set_target_properties(SDL2::Core PROPERTIES
                           IMPORTED_LOCATION "${SDL2_LIBRARY}"
                           INTERFACE_INCLUDE_DIRECTORIES "${SDL2_INCLUDE_DIR}")

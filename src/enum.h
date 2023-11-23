@@ -1,25 +1,37 @@
 #ifndef NAGGYHAZIAMIGNEMLESZMEGJAVULVA_ENUM_H
 #define NAGGYHAZIAMIGNEMLESZMEGJAVULVA_ENUM_H
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL2_gfxPrimitives.h>
 
-typedef enum babukkoddal{
-    ures = 0,
-    kiraly = 1,
-    kiralyno = 2,
-    bastya = 3,
-    futo = 4,
-    huszar = 5,
-    gyalog = 6,
-} babukkoddal;
+typedef enum Babukkoddal{
+    ures = -1,
+    kiraly ,
+    kiralyno ,
+    bastya ,
+    futo,
+    huszar ,
+    gyalog
+} Babukkoddal;
 
-typedef enum szinek{
+typedef enum Szinek{
     feher = -1,
-    fekete = 1
-}szinek;
+    nincs ,
+    fekete
+}Szinek;
 
-typedef struct babuk{
-    babukkoddal babu ;
-    szinek szin;
-}babuk;
+typedef struct Babuk{
+    Babukkoddal babu ;
+    Szinek szin;
+}Babuk;
+
+/* a pieces_2.png fajlban levo figurak merete */
+enum { MERET = 110};
+
+
+typedef struct Kepek{
+    SDL_Texture *babuk, *gomb, *lista;
+}Kepek;
 
 
 

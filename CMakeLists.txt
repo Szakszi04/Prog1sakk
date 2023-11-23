@@ -12,9 +12,22 @@ find_package(SDL2_ttf REQUIRED)
 # find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_gfx REQUIRED)
 
-add_executable(nagyhazi)
+add_executable(nagyhazi
+       src/main.c
+        src/lepesek.c
+        src/lepesek_babukra.c
+        src/lepeskisegitofugvenyek.c
+        src/sakktabla.c
+        src/fajl.c
+        src/lancolt_lista.c
+        src/lancolt_lista.h
+
+
+)
 target_sources(nagyhazi PRIVATE
-    src/main.c
+        src/grafika.h
+        src/grafika.c
+
 )
 target_include_directories(nagyhazi PRIVATE include/chess)
 target_compile_options(nagyhazi PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
