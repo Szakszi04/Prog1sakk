@@ -12,24 +12,18 @@ find_package(SDL2_ttf REQUIRED)
 # find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_gfx REQUIRED)
 
-add_executable(nagyhazi
-       src/main.c
-        src/lepesek.c
-        src/lepesek_babukra.c
-        src/lepeskisegitofugvenyek.c
-        src/sakktabla.c
-        src/fajl.c
-        src/lancolt_lista.c
-        src/lancolt_lista.h
-
-
-)
+add_executable(nagyhazi)
 target_sources(nagyhazi PRIVATE
-        src/grafika.h
-        src/grafika.c
-
+    src/fajl.c
+    src/grafika.c
+    src/lancolt_lista.c
+    src/lepesek_babukra.c
+    src/lepesek.c
+    src/lepeskisegitofuggvenyek.c
+    src/main.c
+    src/sakktabla.c
 )
-target_include_directories(nagyhazi PRIVATE include/chess)
+
 target_compile_options(nagyhazi PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
 target_link_libraries(nagyhazi PRIVATE
     SDL2::Main
@@ -39,5 +33,6 @@ target_link_libraries(nagyhazi PRIVATE
     # SDL2::Mixer
     SDL2::GFX
 )
-# target_compile_options(nagyhazi PRIVATE -fsanitize=address -fno-omit-frame-pointer)
-# target_link_options(nagyhazi PRIVATE -fsanitize=address)
+
+target_compile_options(nagyhazi PRIVATE -fsanitize=address -fno-omit-frame-pointer)
+target_link_options(nagyhazi PRIVATE -fsanitize=address)
