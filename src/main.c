@@ -8,51 +8,70 @@
 #include "lancolt_lista.h"
 #include "lepeskisegitofuggvenyek.h"
 #include "sakktabla.h"
+#include "debugmalloc.h"
 
 int main(void) {
-    int kivansakkban;
-    int vissza_lepes_db = 1;
     SDL_Window *window;
     SDL_Renderer *renderer;
-    SDL_Texture *babukep, *gomb, *visszagomb;
-    Babuk tabla[8][8];
     sdl_init(1000, 1000, &window, &renderer);
-    FILE *sakkfajl = NULL;
-    Lista *volt_lepesek = (Lista *)malloc(sizeof(Lista));
-    bool kikov = true;
-    kepbetoltes(renderer, &babukep, &gomb, &visszagomb);
     menu(renderer);
-    int vissszateres_ertek;
-    if (menu_kattintas(renderer).y < 500) {
-        feltolt(renderer, babukep, gomb, visszagomb, tabla);
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                volt_lepesek->ltabla[i][j].szin = tabla[i][j].szin;
-                volt_lepesek->ltabla[i][j].babu = tabla[i][j].babu;
+    SDL_Point menukatt = menu_kattintas();
+    if(menukatt.y != -1) {
+        SDL_Texture *babukep, *gomb, *visszagomb;
+        int kivansakkban = 10;
+        Babuk tabla[8][8];
+        FILE *sakkfajl = NULL;
+        bool kikov = true, engedelyezes;
+        kepbetoltes(renderer, &babukep, &gomb, &visszagomb);
+        Lista *volt_lepesek = (Lista *)malloc(sizeof(Lista));
+        if (menukatt.y < 500) {// A menüben lévő kattintás alapján eldönti, hogy mi következzené
+            feltolt(renderer, babukep, gomb, visszagomb, tabla); // Egy sakk indul alaphelyetből.
+            for (int i = 0; i < 8; ++i) {
+                for (int j = 0; j < 8; ++j) {
+                    volt_lepesek->ltabla[i][j].szin = tabla[i][j].szin;
+                    volt_lepesek->ltabla[i][j].babu = tabla[i][j].babu;
+                }
             }
+            volt_lepesek->kov = NULL;
+
+        } else if (fajlbeolvasas(sakkfajl, tabla, &kikov) == 0) { // Egy sakk indul a mentett állapot alapján.
+            alaprajz(renderer);
+            betoltott_kirajz(renderer, tabla, babukep, gomb, visszagomb);
+            elore(&volt_lepesek, tabla);
         }
-        volt_lepesek->kov = NULL;
 
         do {
-            vissszateres_ertek = grafikailepes(renderer, babukep, gomb, visszagomb, sakkfajl, tabla, &kikov, &volt_lepesek);
+            if (!van_sakk(tabla, &kivansakkban)) {
+                engedelyezes = true;
+                int lepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
+                if (lepes == 10)
+                    break;
+                if ((lepes == 1 && (kivansakkban != kikov)) || lepes == -1) {
+                    kikov = !kikov;
+                    betoltott_kirajz(renderer, tabla, babukep, gomb, visszagomb);
+                    elore(&volt_lepesek, tabla);
+                }
 
-            if (van_sakk(tabla, &kivansakkban)) {
-                printf("sakk");
-                if (sakkmatt(tabla, kivansakkban))
-                    alaprajz(renderer);
+            } else if (sakkmatt(tabla, kivansakkban)) {
+                break;
+            } else if (van_sakk(tabla, &kivansakkban)) {
+                engedelyezes = false;
+                int masiklepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
+                if(masiklepes == 10)
+                    break;
+                while (masiklepes != -1) {
+                    masiklepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
+                }
+                kikov = !kikov;
+                betoltott_kirajz(renderer, tabla, babukep, gomb, visszagomb);
+                elore(&volt_lepesek, tabla);
             }
-            if (vissszateres_ertek == 0)
-                elore(&volt_lepesek, tabla);
-        } while (vissszateres_ertek == 0 || vissszateres_ertek == 1);
 
-    } else if (fajlbeolvasas(sakkfajl, tabla, &kikov) == 0) {
-        alaprajz(renderer);
-        betoltott_kirajz(renderer, tabla, babukep, gomb, visszagomb);
-        do {
-            vissszateres_ertek = grafikailepes(renderer, babukep, gomb, visszagomb, sakkfajl, tabla, &kikov, &volt_lepesek);
-            if (vissszateres_ertek == 0)
-                elore(&volt_lepesek, tabla);
-        } while (vissszateres_ertek == 0 || vissszateres_ertek == 1);
+
+        } while (true);
+        felszabadit_elore(volt_lepesek);
+
     }
+
     return 0;
 }

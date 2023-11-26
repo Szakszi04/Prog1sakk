@@ -1,4 +1,5 @@
 #include "sakktabla.h"
+#include "debugmalloc.h"
 
 void feltolt(SDL_Renderer *renderer, SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza, Babuk ftabla[8][8]) {
     alaprajz(renderer);
@@ -32,4 +33,4 @@ void feltolt(SDL_Renderer *renderer, SDL_Texture *babukep, SDL_Texture *gomb, SD
     }
     betoltott_kirajz(renderer, ftabla, babukep, gomb, vissza);
     SDL_RenderPresent(renderer);
-}
+} // Az alap állapotot beállitja, ha új játékot választ a felhaszbáló.

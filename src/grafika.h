@@ -23,14 +23,10 @@ void sbabu_rajzol(SDL_Renderer *renderer, SDL_Texture *babukep, Babukkoddal mely
 
 void menu(SDL_Renderer *renderer);
 
-SDL_Point kattintas(SDL_Renderer *renderer, Lista *u);
+SDL_Point kattintas();
 
-SDL_Point menu_kattintas(SDL_Renderer *renderer);
-
-int grafikailepes(SDL_Renderer *renderer, SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza, FILE *fajl, Babuk fuggvenytabla[8][8], bool *feher_kov, Lista **u);
+SDL_Point menu_kattintas();
 
 void betoltott_kirajz(SDL_Renderer *renderer, Babuk ftabla[8][8], SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza);
-
-void kiszinez(SDL_Renderer *renderer, SDL_Point katt, bool fekete);
 
 #endif //NAGYHAZI_GRAFIKA_H

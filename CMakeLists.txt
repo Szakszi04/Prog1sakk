@@ -34,5 +34,3 @@ target_link_libraries(nagyhazi PRIVATE
     SDL2::GFX
 )
 
-target_compile_options(nagyhazi PRIVATE -fsanitize=address -fno-omit-frame-pointer)
-target_link_options(nagyhazi PRIVATE -fsanitize=address)
