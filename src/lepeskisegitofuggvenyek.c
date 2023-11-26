@@ -117,7 +117,7 @@ bool sakkmatt(Babuk ftabla[8][8], int kivansakk) {
     return true;
 } // Lefuttat egy szimuláciot a sakk függvény segitségével, ami eldönti, hogy sakk matt-e.
 
-int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza,  Babuk fuggvenytabla[8][8], bool *feher_kov, Lista **u, int *kivansakk, bool engedely) {
+Returnkod megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza,  Babuk fuggvenytabla[8][8], bool *feher_kov, Lista **u, int *kivansakk, bool engedely) {
     // Leszimulál egy sakk lépést, és utána eldönti, hogy azt a lépést vissza adja-e a mainben lévő mátrix tömbbnek. Ez felel az ütés grafikai szépségéért is.
     int temp_kivansakk;
     Babuk temp[8][8];
@@ -128,15 +128,15 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
     }
     SDL_Point katthonnan = kattintas();
     if(katthonnan.x == -1)
-        return 10;
+        return kilepes;
 
     if (katthonnan.y == 8 && katthonnan.x == 8) {
         fajlkiiras(fajl, fuggvenytabla, *feher_kov);
-        return 0;
+        return semleges;
     }
     if (katthonnan.y == -1 && katthonnan.x == 8) {
         if (*u == NULL)
-            return -1;
+            return lacolt_vissza;
         lepkedes_elore(u);
         alaprajz(renderer);
         betoltott_kirajz(renderer, (*u)->ltabla, babukep, gomb, vissza);
@@ -145,7 +145,7 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
                 fuggvenytabla[i][j] = (*u)->ltabla[i][j];
             }
         }
-        return -1;
+        return lacolt_vissza;
     }
     Szinek kijon;
     kijon = *feher_kov ? fekete : feher;
@@ -153,7 +153,7 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
 
         SDL_Point katthova = kattintas();
         if(katthova.y == -1)
-            return 10;
+            return kilepes;
 
 
         if (szabalyoslepes(katthonnan.x, katthova.x, katthonnan.y, katthova.y, fuggvenytabla) && katthova.y < 8 && katthova.x < 8 && katthova.y > -1) {
@@ -175,7 +175,7 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
             int kileszsakk;
             if(van_sakk(temp,&kileszsakk))
                 if(kileszsakk == temp[katthonnan.y][katthonnan.x].szin)
-                    return 1;
+                    return sakk;
 
 
             if (temp[katthova.y][katthova.x].babu == gyalog && ((temp[katthova.y][katthova.x].szin == feher && katthova.y == 0) ||
@@ -192,17 +192,17 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
                         }
                     }
                 }
-                    return 1;
+                    return sakk;
                 } else{
                     for (int i = 0; i < 8; ++i) {
                         for (int j = 0; j < 8; ++j) {
                         fuggvenytabla[i][j] = temp[i][j];
                             }
                         }
-                return -1;
+                return nem_sakk;
                 }
             }
     }
-    return 0;
+    return semleges;
 } //
 

@@ -21,7 +21,7 @@ bool van_sakk(Babuk ftabla[8][8], int *kivansakk);
 
 bool sakkmatt(Babuk ftabla[8][8], int kivansakk);
 
-int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza,  Babuk fuggvenytabla[8][8], bool *feher_kov, Lista **u, int *kivansakk, bool engedely) ;
+Returnkod megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza,  Babuk fuggvenytabla[8][8], bool *feher_kov, Lista **u, int *kivansakk, bool engedely) ;
 
 
 #endif //NAGGYHAZIAMIGNEMLESZMEGJAVULVA_LEPESKISEGITOFUGGVENYEK_H

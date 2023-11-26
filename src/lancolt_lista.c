@@ -27,7 +27,7 @@ void felszabadit_elore(Lista *u) { // felszabaditja a dinamikusan foglalt lista 
 void lepkedes_elore(Lista **u) { //  A kapott lista pointert át állitja az utána levőre, és felszabaditja a paraméterként memória helyét.
     if (*u != NULL && (*u)->kov != NULL) {
         Lista *kov = (*u)->kov;
-        free(u);
+        free(*u);
         *u = kov;
         SDL_Log("Lépkedés előre");
     }

@@ -103,7 +103,7 @@ void sbabu_rajzol(SDL_Renderer *renderer, SDL_Texture *babukep, Babukkoddal mely
 
 void menu(SDL_Renderer *renderer) {
     boxRGBA(renderer, 0, 0, 1000, 1000, 23, 75, 218, 0xFF);
-    SDL_Color szin = {0, 12, 107};
+    SDL_Color szin = {0, 12, 107,0};
     TTF_Init();
     TTF_Font *szovegtipus = TTF_OpenFont("assets/LiberationSerif-Regular.ttf", 56);
     if (!szovegtipus) {

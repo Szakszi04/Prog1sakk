@@ -29,5 +29,12 @@ typedef struct Babuk { // A 2 enum segitségével, egy stukrurát alkott a bábu
 /* a pieces_2.png fajlban levo figurak merete */
 enum { MERET = 110 }; // A gombok, beállitását segiti.
 
+typedef enum Returnkod{
+    sakk,
+    nem_sakk,
+    semleges,
+    kilepes,
+    lacolt_vissza
+}Returnkod;
 
 #endif //NAGGYHAZIAMIGNEMLESZMEGJAVULVA_ENUM_H

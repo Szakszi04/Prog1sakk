@@ -44,9 +44,9 @@ int main(void) {
             if (!van_sakk(tabla, &kivansakkban)) {
                 engedelyezes = true;
                 int lepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
-                if (lepes == 10)
+                if (lepes == kilepes)
                     break;
-                if ((lepes == 1 && (kivansakkban != kikov)) || lepes == -1) {
+                if ((lepes == sakk && (kivansakkban != kikov)) || lepes == nem_sakk) {
                     kikov = !kikov;
                     betoltott_kirajz(renderer, tabla, babukep, gomb, visszagomb);
                     elore(&volt_lepesek, tabla);
@@ -57,9 +57,9 @@ int main(void) {
             } else if (van_sakk(tabla, &kivansakkban)) {
                 engedelyezes = false;
                 int masiklepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
-                if(masiklepes == 10)
+                if(masiklepes == kilepes)
                     break;
-                while (masiklepes != -1) {
+                while (masiklepes != nem_sakk) {
                     masiklepes = megint_sakk(renderer, sakkfajl, babukep, gomb, visszagomb, tabla, &kikov, &volt_lepesek, &kivansakkban, engedelyezes);
                 }
                 kikov = !kikov;

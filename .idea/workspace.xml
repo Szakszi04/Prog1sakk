@@ -20,18 +20,13 @@
   <component name="ChangeListManager">
     <list default="true" id="91d5e7b8-c958-42e8-b92f-37aec06718d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sakk_jatszma.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sakk_jatszma.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/enum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/enum.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fajl.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/fajl.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/grafika.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/grafika.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/grafika.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/grafika.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lancolt_lista.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lancolt_lista.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lepesek.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lepesek.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lepesek_babukra.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lepesek_babukra.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lepeskisegitofuggvenyek.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/lepeskisegitofuggvenyek.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lepeskisegitofuggvenyek.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/lepeskisegitofuggvenyek.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sakktabla.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/sakktabla.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +71,11 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="nagyhazi" />
       <option name="INTERPRETER_OPTIONS" value="" />
