@@ -99,7 +99,7 @@ void sbabu_rajzol(SDL_Renderer *renderer, SDL_Texture *babukep, Babukkoddal mely
     SDL_Rect dest = {x, y, MERET, MERET};
     /* kepreszlet masolasa */
     SDL_RenderCopy(renderer, babukep, &src, &dest);
-}// A kepbetoltestől kapott, paraméterek alapján a fekete babukat képes a kért kodrinátákra rajzolni.
+} // A kepbetoltestől kapott, paraméterek alapján a fekete babukat képes a kért kodrinátákra rajzolni.
 
 void menu(SDL_Renderer *renderer) {
     boxRGBA(renderer, 0, 0, 1000, 1000, 23, 75, 218, 0xFF);
@@ -140,15 +140,15 @@ SDL_Point kattintas() {
 
     while (SDL_WaitEvent(&event) != 0) {
         if (event.type == SDL_QUIT) {
-            kattintaspozicio.x = -1;
-            return kattintaspozicio;
+            break;
         } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.button.x >= 100 && event.button.x <= 1000 && event.button.y >= 0 && event.button.y <= 1000) {
             // Bal egérgomb lenyomása
             kattintaspozicio.x = event.button.x / 100 - 1;
             kattintaspozicio.y = event.button.y / 100 - 1;
-            return kattintaspozicio;
+            break;
         }
     }
+    return kattintaspozicio;
 } // Az egér kattintás adja vissza, amivel tudnak a függvények tovább dolgozni a sakkban.
 
 SDL_Point menu_kattintas() {
@@ -157,18 +157,17 @@ SDL_Point menu_kattintas() {
 
     while (SDL_WaitEvent(&event) != 0) {
         if (event.type == SDL_QUIT) {
-            kattintaspozicio.x = -1;
-            kattintaspozicio.y = -1;
-            return kattintaspozicio;
+            break;
             // Kilépés, ha ablakot bezárják
 
         } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.button.x >= 300 && event.button.x <= 700 && ((event.button.y >= 540 && event.button.y <= 640) || (event.button.y >= 300 && event.button.y <= 380))) {
             // Bal egérgomb lenyomása
             kattintaspozicio.x = event.button.x;
             kattintaspozicio.y = event.button.y;
-            return kattintaspozicio;
+            break;
         }
     }
+    return kattintaspozicio;
 } // Az egér kattintás adja vissza, amivel tudnak a függvények tovább dolgozni a menüben.
 
 void betoltott_kirajz(SDL_Renderer *renderer, Babuk ftabla[8][8], SDL_Texture *babukep, SDL_Texture *gomb, SDL_Texture *vissza) {
@@ -176,17 +175,17 @@ void betoltott_kirajz(SDL_Renderer *renderer, Babuk ftabla[8][8], SDL_Texture *b
         for (int j = 0; j < 8; ++j) {
             if (ftabla[i][j].szin == fekete)
                 sbabu_rajzol(renderer, babukep, ftabla[i][j].babu, ((j + 1) * 100) + 5, ((i + 1) * 100) + 10);
-            else if(ftabla[i][j].szin == feher)
+            else if (ftabla[i][j].szin == feher)
                 vbabu_rajzol(renderer, babukep, ftabla[i][j].babu, ((j + 1) * 100) + 5, ((i + 1) * 100) + 10);
-            else  if(ftabla[i][j].babu == ures){
-                if((i+j) % 2){
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                SDL_Rect rect = {(j + 1) * 100, (i + 1) * 100, 100, 100};
-                SDL_RenderFillRect(renderer, &rect);
-            }else {
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-                SDL_Rect rect = {(j + 1) * 100, (i + 1) * 100, 100, 100};
-                SDL_RenderFillRect(renderer, &rect);
+            else if (ftabla[i][j].babu == ures) {
+                if ((i + j) % 2) {
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_Rect rect = {(j + 1) * 100, (i + 1) * 100, 100, 100};
+                    SDL_RenderFillRect(renderer, &rect);
+                } else {
+                    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+                    SDL_Rect rect = {(j + 1) * 100, (i + 1) * 100, 100, 100};
+                    SDL_RenderFillRect(renderer, &rect);
                 }
             }
         }
@@ -195,5 +194,3 @@ void betoltott_kirajz(SDL_Renderer *renderer, Babuk ftabla[8][8], SDL_Texture *b
     gombrajz(renderer, gomb, 905, 910);
     SDL_RenderPresent(renderer);
 } // A paraméterként kapott sakk állást tudja grafikailag kirajzolnié
-
-

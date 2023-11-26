@@ -13,7 +13,7 @@ typedef struct Lista {
 
 void elore(Lista **u, Babuk ftabla[8][8]);
 
-Lista *lepkedes_elore(Lista *u);
+void lepkedes_elore(Lista **u);
 
 void felszabadit_elore(Lista *u);
 

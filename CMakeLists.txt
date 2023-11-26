@@ -24,7 +24,7 @@ target_sources(nagyhazi PRIVATE
     src/sakktabla.c
 )
 
-target_compile_options(nagyhazi PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
+target_compile_options(nagyhazi PRIVATE -Werror -Wall -Wextra -Wpedantic)
 target_link_libraries(nagyhazi PRIVATE
     SDL2::Main
     SDL2::Image
@@ -34,3 +34,5 @@ target_link_libraries(nagyhazi PRIVATE
     SDL2::GFX
 )
 
+# target_compile_options(nagyhazi PRIVATE -fsanitize=address -fno-omit-frame-pointer)
+# target_link_options(nagyhazi PRIVATE -fsanitize=address)

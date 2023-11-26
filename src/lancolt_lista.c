@@ -11,10 +11,7 @@ void elore(Lista **u, Babuk ftabla[8][8]) { // A jelenlegi sakk állást elmenti
             uj->ltabla[i][j].szin = ftabla[i][j].szin;
         }
     }
-    if (*u == NULL)
-        uj->kov = NULL;
-    else
-        uj->kov = *u;
+    uj->kov = *u;
     *u = uj;
 }
 
@@ -26,12 +23,12 @@ void felszabadit_elore(Lista *u) { // felszabaditja a dinamikusan foglalt lista 
         u = temp;
     }
 }
-    
-Lista *lepkedes_elore(Lista *u) { //  A kapott lista pointert át állitja ay utána levőre, és felszabaditja a paraméterként memória helyét.
-    if (u != NULL && u->kov != NULL) {
-        Lista *kov = u->kov;
+
+void lepkedes_elore(Lista **u) { //  A kapott lista pointert át állitja az utána levőre, és felszabaditja a paraméterként memória helyét.
+    if (*u != NULL && (*u)->kov != NULL) {
+        Lista *kov = (*u)->kov;
         free(u);
-        u = kov;
+        *u = kov;
+        SDL_Log("Lépkedés előre");
     }
-    return u;
 }

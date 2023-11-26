@@ -1,5 +1,6 @@
 
 #include "lepesek_babukra.h"
+#include "debugmalloc.h"
 
 bool szabalyoslepes(int x_innen, int x_oda, int y_innen, int y_oda, Babuk ftabla[8][8]) { // megvizsgálja, hogy a bábu ellép e, és ahova lép ott nem ""csapattárs"" áll.
     if (abs(x_innen - x_oda) + abs(y_innen - y_oda) != 0 && ftabla[y_innen][x_innen].szin != ftabla[y_oda][x_oda].szin) { // Aztán egy switch case segitségével megviszgállja, hogy szabályos-e a lépés.

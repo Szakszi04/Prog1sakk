@@ -137,14 +137,12 @@ int megint_sakk(SDL_Renderer *renderer, FILE *fajl,SDL_Texture *babukep, SDL_Tex
     if (katthonnan.y == -1 && katthonnan.x == 8) {
         if (*u == NULL)
             return -1;
-        Lista *jelenlegi;
-        jelenlegi = lepkedes_elore(*u);
+        lepkedes_elore(u);
         alaprajz(renderer);
-        betoltott_kirajz(renderer, jelenlegi->ltabla, babukep, gomb, vissza);
-        *u = jelenlegi;
+        betoltott_kirajz(renderer, (*u)->ltabla, babukep, gomb, vissza);
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                fuggvenytabla[i][j] = jelenlegi->ltabla[i][j];
+                fuggvenytabla[i][j] = (*u)->ltabla[i][j];
             }
         }
         return -1;
